@@ -7,7 +7,12 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<link href="webjars/bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
-		<style></style>
+		<!-- <link href="http://designmodo.github.io/Flat-UI/css/flat-ui.css" rel="stylesheet"> -->
+		<style>
+			html {
+				overflow-y: scroll;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="container">
@@ -32,7 +37,7 @@
 				<div class="row">
 					<div class="span4">
 						<form>
-							{{view Ember.TextArea valueBinding="newText" rows="4" class="span4" placeholder="Type something..." }}
+							{{view App.TextArea valueBinding="newText" maxlengthBinding="maxLength" rows="4" class="span4" placeholder="Type something..." }}
 
 							<div class="pull-right">
 								<span class="label">{{remainingChars}}</span>

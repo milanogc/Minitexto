@@ -6,6 +6,10 @@ App = Ember.Application.create({
 	rootElement: '.container'
 });
 
+/*App.Router.reopen({
+	location: 'history'
+});*/
+
 App.Router.map(function() {
 	this.resource('posts');
 });
@@ -23,14 +27,15 @@ App.PostsRoute = Ember.Route.extend({
 });
 
 App.PostsController = Ember.ArrayController.extend({
+	maxLength: 140,
 	newText: '',
 
 	remainingChars: function() {
-		return 140 - this.get('newText').length;
+		return this.maxLength - this.get('newText').length;
 	}.property('newText'),
 
 	submit: function() {
-		var text = this.get('newText');
+		var text = this.get('newText').trim();
 
 		if (!text) {
 			return;
@@ -44,6 +49,15 @@ App.PostsController = Ember.ArrayController.extend({
 	reversedContent: function() {
 		return this.get('content').toArray().reverse();
 	}.property('content.@each')
+});
+
+App.TextArea = Ember.TextArea.extend({
+	keyDown: function(evt) {
+		if (evt.keyCode === 13) {
+			this.get('controller').send('submit');
+			return false;
+		}
+	}
 });
 
 App.Post = DS.Model.extend({
