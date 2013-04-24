@@ -20,30 +20,34 @@
 				<h1>Minitexto</h1>
 			</div>
 
-			<!-- <div class="span3 well">
-				<input class="span3" name="username" placeholder="E-mail" type="text">
-				<input class="span3" name="password" placeholder="Password" type="password"> 
-				<button class="btn btn-primary" type="submit">Sign in</button>
-			</div>
+			<script type="text/x-handlebars" id="login">
+				<div class="row">
+					<div class="span3 well">
+						<input class="span3" name="username" placeholder="E-mail" type="text">
+						<input class="span3" name="password" placeholder="Password" type="password"> 
+						<button class="btn btn-primary" type="submit">Sign in</button>
+					</div>
+				</div>
 
-			<div class="span3 well">
-				<input class="span3" name="name" placeholder="Full name" type="text"> 
-				<input class="span3" name="username" placeholder="E-mail" type="text">
-				<input class="span3" name="password" placeholder="Password" type="password"> 
-				<button class="btn btn-primary" type="submit">Sign up</button>
-			</div> -->
+				<div class="row">
+					<div class="span3 well">
+						<input class="span3" name="name" placeholder="Full name" type="text"> 
+						<input class="span3" name="username" placeholder="E-mail" type="text">
+						<input class="span3" name="password" placeholder="Password" type="password"> 
+						<button class="btn btn-primary" type="submit">Sign up</button>
+					</div>
+				</div>
+			</script>
 
 			<script type="text/x-handlebars" id="posts">
 				<div class="row">
 					<div class="span4">
-						<form>
-							{{view App.TextArea valueBinding="newText" maxlengthBinding="maxLength" rows="4" class="span4" placeholder="Type something..." }}
+						{{view App.TextArea valueBinding="newText" maxlengthBinding="maxLength" rows="4" class="span4" placeholder="Type something..." }}
 
-							<div class="pull-right">
-								<span class="label">{{remainingChars}}</span>
-								<button {{action "submit"}} type="submit" class="btn btn-primary">Submit</button>
-							</div>
-						</form>
+						<div class="pull-right">
+							<span class="label">{{remainingChars}}</span>
+							<button {{action "submit"}} type="submit" class="btn btn-primary">Submit</button>
+						</div>
 					</div>
 
 					<div class="span8">

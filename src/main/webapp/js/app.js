@@ -11,6 +11,7 @@ App = Ember.Application.create({
 });*/
 
 App.Router.map(function() {
+	this.route('login');
 	this.resource('posts');
 });
 
@@ -67,10 +68,10 @@ App.Post = DS.Model.extend({
 
 App.Store = DS.Store.extend({
 	revision: 12,
-	adapter: DS.FixtureAdapter
+	adapter: DS.RESTAdapter /*DS.FixtureAdapter*/
 });
 
-App.Post.FIXTURES = [/*{
+/*App.Post.FIXTURES = [{
 	id: 1,
 	text: 'Message 1',
 	publishedAt: new Date()
@@ -78,7 +79,7 @@ App.Post.FIXTURES = [/*{
 	id: 2,
 	text: 'Message 2',
 	publishedAt: new Date()
-}*/];
+}];*/
 
 /*for (var i = 0; i < 100; i++) {
 	App.Post.FIXTURES.push({id: i + 1, text: 'Message ' + i, publishedAt: new Date()});	
