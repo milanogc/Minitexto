@@ -18,8 +18,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories("com.milanogc.minitexto.repository") // <jpa:repositories base-package="..." />
-@EnableTransactionManagement // <tx:annotation-driven />
+@EnableJpaRepositories("com.milanogc.minitexto.repository")
+@EnableTransactionManagement
 public class JpaRepositoryConfig {
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
@@ -66,10 +66,6 @@ public class JpaRepositoryConfig {
 		return transactionManager;
 	}
 
-	/**
-	 * Exception translation - translating the low level exceptions - which tie
-	 * the API to JPA - into higher level, generic Spring exceptions.
-	 */
 	@Bean
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();

@@ -27,7 +27,7 @@ public class Post {
 	private Long id;
 	@Column(nullable = false)
 	private String text;
-	@Column(nullable = false)
+	@Column(name = "published_at", nullable = false)
 	@JsonProperty("published_at")
 	private Date publishedAt;
 }

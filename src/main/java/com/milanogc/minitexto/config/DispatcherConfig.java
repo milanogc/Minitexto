@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.milanogc.minitexto.controller") // <context:component-scan base-package="..." />
+@ComponentScan("com.milanogc.minitexto.controller")
 public class DispatcherConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

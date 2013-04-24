@@ -19,7 +19,7 @@ import com.milanogc.minitexto.domain.Post;
 import com.milanogc.minitexto.repository.PostRepository;
 
 @Controller
-@RequestMapping("/posts")
+@RequestMapping("posts")
 public class PostController {
 	@Autowired private PostRepository repository;
 
@@ -38,12 +38,6 @@ public class PostController {
 		return new Posts(repository.findAll());
 	}
 
-	/*@RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public Post get(@PathVariable Long id) {
-		return repository.findOne(id);
-	}*/
-
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
@@ -51,18 +45,4 @@ public class PostController {
 		Assert.notNull(post);
 		return repository.save(post);
 	}
-
-	/*@RequestMapping(value = "{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public Post update(@RequestBody Post post, @PathVariable Long id) {
-		Assert.isTrue(post.getId().equals(id));
-		return repository.save(post);
-	}
-
-	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-	@ResponseStatus(HttpStatus.OK)
-	public void delete(@PathVariable Long id) {
-		repository.delete(id);
-	}*/
 }

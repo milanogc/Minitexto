@@ -40,7 +40,7 @@
 	</build>
 
 	<dependencies>
-		<!-- client side dependencies -->
+		<!-- Client side dependencies -->
 
 		<dependency>
 			<groupId>org.webjars</groupId>
