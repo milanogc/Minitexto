@@ -22,4 +22,4 @@ Server side
 Run the project
 ---------------
 
-  mvn tomcat7:run
+    mvn tomcat7:run
