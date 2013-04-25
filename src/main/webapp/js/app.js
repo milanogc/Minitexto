@@ -41,7 +41,7 @@ App.PostsController = Ember.ArrayController.extend({
 			return;
 		}
 
-		App.Post.createRecord({text: text, publishedAt: new Date()});
+		App.Post.createRecord({text: text});
 		this.get('store').commit();
 		this.set('newText', '');
 	},

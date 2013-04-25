@@ -31,7 +31,7 @@ public class DispatcherConfig extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
-	MappingJackson2HttpMessageConverter converter() {
+	public MappingJackson2HttpMessageConverter converter() {
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 		converter.getObjectMapper().configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
 		converter.getObjectMapper().configure(SerializationFeature.WRAP_ROOT_VALUE, true);

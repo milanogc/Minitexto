@@ -2,6 +2,7 @@ package com.milanogc.minitexto.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,6 +44,7 @@ public class PostController {
 	@ResponseBody
 	public Post save(@RequestBody Post post) {
 		Assert.notNull(post);
+		post.setPublishedAt(new Date());
 		return repository.save(post);
 	}
 }
