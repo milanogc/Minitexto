@@ -29,6 +29,8 @@ App.PostsRoute = Ember.Route.extend({
 App.PostsController = Ember.ArrayController.extend({
 	maxLength: 140,
 	newText: '',
+	sortProperties: ['id'],
+	sortAscending: false,
 
 	remainingChars: function() {
 		return this.maxLength - this.get('newText').length;
@@ -45,10 +47,6 @@ App.PostsController = Ember.ArrayController.extend({
 		this.get('store').commit();
 		this.set('newText', '');
 	},
-
-	reversedContent: function() {
-		return this.get('content').toArray().reverse();
-	}.property('content.@each')
 });
 
 App.TextArea = Ember.TextArea.extend({
