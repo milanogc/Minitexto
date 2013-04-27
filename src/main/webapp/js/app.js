@@ -32,6 +32,14 @@ App.PostsController = Ember.ArrayController.extend({
 	sortProperties: ['id'],
 	sortAscending: false,
 
+	notDirtyFilter: function(item, index) {
+		return !item.get('isDirty');
+	},
+
+	filteredContent: function() {
+		return this.get('arrangedContent').filter(this.notDirtyFilter);
+	}.property('arrangedContent.@each'),
+
 	remainingChars: function() {
 		return this.maxLength - this.get('newText').length;
 	}.property('newText'),
