@@ -23,6 +23,15 @@ App.IndexRoute = Ember.Route.extend({
 App.PostsRoute = Ember.Route.extend({
 	model: function() {
 		return App.Post.find();
+	},
+
+	events: {
+		more: function() {
+			var currentPosts = this.modelFor('posts');
+			var currentOldestPostId = currentPosts.get('lastObject.id');
+			var olderPosts = App.Post.find({id: currentOldestPostId});
+			currentPosts.pushObjects(olderPosts);
+		}
 	}
 });
 
@@ -47,6 +56,12 @@ App.PostsController = Ember.ArrayController.extend({
 		this.get('store').commit();
 		this.set('newText', '');
 	},
+});
+
+App.PostsView = Ember.View.extend(Ember.InfineScrollableViewMixin, {
+	didScroolToBottom: function() {
+		this.get('controller').send('more');
+	}
 });
 
 App.TextArea = Ember.TextArea.extend({
