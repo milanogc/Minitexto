@@ -37,10 +37,10 @@ App.PostsRoute = Ember.Route.extend({
 		return App.Post.find();
 	},
 
-	update: function(referencePostPath, older) {
+	update: function(referencePostPath, newer) {
 		var currentPosts = this.modelFor('posts');
 		var referencePostId = currentPosts.get(referencePostPath);
-		var posts = App.Post.find({id: referencePostId, newer: older});
+		var posts = App.Post.find({id: referencePostId, newer: newer});
 		currentPosts.pushObjects(posts);
 	},
 
