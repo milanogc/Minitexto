@@ -24,7 +24,6 @@ import com.milanogc.minitexto.repository.PostRepository;
 @Controller
 @RequestMapping("posts")
 public class PostController {
-	private static final PageRequest FIND_PAGE_REQUEST = new PageRequest(0, 10, Sort.Direction.DESC, "id");
 	@Autowired private PostRepository repository;
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -32,15 +31,19 @@ public class PostController {
 	public Posts find(@RequestParam(required = false) Long id, @RequestParam(required = false) boolean newer) {
 		Page<Post> posts;
 
-		if (id == null) {
-			id = Long.MAX_VALUE;
-		}
-
 		if (newer) {
-			posts = repository.findByIdGreaterThan(id, FIND_PAGE_REQUEST);
+			if (id == null) {
+				id = Long.MIN_VALUE;
+			}
+
+			posts = repository.findByIdGreaterThan(id, new PageRequest(0, 10, Sort.Direction.ASC, "id"));
 		}
 		else {
-			posts = repository.findByIdLessThan(id, FIND_PAGE_REQUEST);
+			if (id == null) {
+				id = Long.MAX_VALUE;
+			}
+
+			posts = repository.findByIdLessThan(id, new PageRequest(0, 10, Sort.Direction.DESC, "id"));
 		}
 
 		return new Posts(posts.getContent());

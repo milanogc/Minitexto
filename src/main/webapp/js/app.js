@@ -26,7 +26,7 @@ App.PostsRoute = Ember.Route.extend({
 	init: function() {
 		this.intervalId = setInterval(function(postsRoute) {
 			postsRoute.send('newer');
-		}, 5000, this);
+		}, 1000, this);
 	},
 
 	destroy: function() {
