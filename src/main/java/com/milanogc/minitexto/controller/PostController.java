@@ -29,12 +29,20 @@ public class PostController {
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Posts find(@RequestParam(required = false) Long id) {
+	public Posts find(@RequestParam(required = false) Long id, @RequestParam(required = false) boolean newer) {
+		Page<Post> posts;
+
 		if (id == null) {
 			id = Long.MAX_VALUE;
 		}
 
-		Page<Post> posts = repository.findByIdLessThan(id, FIND_PAGE_REQUEST);
+		if (newer) {
+			posts = repository.findByIdGreaterThan(id, FIND_PAGE_REQUEST);
+		}
+		else {
+			posts = repository.findByIdLessThan(id, FIND_PAGE_REQUEST);
+		}
+
 		return new Posts(posts.getContent());
 	}
 

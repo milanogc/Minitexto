@@ -21,16 +21,36 @@ App.IndexRoute = Ember.Route.extend({
 });
 
 App.PostsRoute = Ember.Route.extend({
+	intervalId: null,
+
+	init: function() {
+		this.intervalId = setInterval(function(postsRoute) {
+			postsRoute.send('newer');
+		}, 5000, this);
+	},
+
+	destroy: function() {
+		clearInterval(this.intervalId);
+	},
+
 	model: function() {
 		return App.Post.find();
 	},
 
+	update: function(referencePostPath, older) {
+		var currentPosts = this.modelFor('posts');
+		var referencePostId = currentPosts.get(referencePostPath);
+		var posts = App.Post.find({id: referencePostId, newer: older});
+		currentPosts.pushObjects(posts);
+	},
+
 	events: {
-		more: function() {
-			var currentPosts = this.modelFor('posts');
-			var currentOldestPostId = currentPosts.get('lastObject.id');
-			var olderPosts = App.Post.find({id: currentOldestPostId});
-			currentPosts.pushObjects(olderPosts);
+		newer: function() {
+			this.update('firstObject.id', true);
+		},
+
+		older: function() {
+			this.update('lastObject.id');
 		}
 	}
 });
@@ -60,7 +80,7 @@ App.PostsController = Ember.ArrayController.extend({
 
 App.PostsView = Ember.View.extend(Ember.InfineScrollableViewMixin, {
 	didScroolToBottom: function() {
-		this.get('controller').send('more');
+		this.get('controller').send('older');
 	}
 });
 

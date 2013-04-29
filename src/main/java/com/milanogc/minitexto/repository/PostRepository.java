@@ -8,4 +8,5 @@ import com.milanogc.minitexto.domain.Post;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 	Page<Post> findByIdLessThan(Long id, Pageable pageable);
+	Page<Post> findByIdGreaterThan(Long id, Pageable pageable);
 }
