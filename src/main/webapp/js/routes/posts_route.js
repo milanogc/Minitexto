@@ -1,16 +1,48 @@
 'use strict';
 
+function getRootPath() {
+	var loc = window.location;
+	var newUri;
+
+	if (loc.protocol === "https:") {
+		newUri = "wss";
+	}
+	else {
+		newUri = "ws";
+	}
+
+	newUri += "://" + loc.host;
+	newUri += loc.pathname;
+	return newUri;
+}
+
 App.PostsRoute = Ember.Route.extend({
+	webSocket: null,
 	intervalId: null,
 
 	init: function() {
-		this.intervalId = setInterval(function(postsRoute) {
+		var postsRoute = this;
+
+		var newerEmitter = function() {
 			postsRoute.send('newer');
-		}, 1000, this);
+		};
+
+		if ('WebSocket' in window) {
+			this.webSocket = new WebSocket(getRootPath() + '/websocket/broadcast');
+			this.webSocket.onmessage = newerEmitter;
+		}
+		else {
+			this.intervalId = setInterval(newerEmitter, 1000);
+		}
 	},
 
 	destroy: function() {
-		clearInterval(this.intervalId);
+		if ('WebSocket' in window) {
+			this.webSocket.close();
+		}
+		else {
+			clearInterval(this.intervalId);
+		}
 	},
 
 	model: function() {

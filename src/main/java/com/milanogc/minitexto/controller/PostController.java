@@ -1,5 +1,6 @@
 package com.milanogc.minitexto.controller;
 
+import java.io.IOException;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.milanogc.minitexto.domain.Post;
 import com.milanogc.minitexto.domain.Posts;
 import com.milanogc.minitexto.repository.PostRepository;
+import com.milanogc.minitexto.service.BroadcastService;
 
 @Controller
 @RequestMapping("posts")
 public class PostController {
 	@Autowired private PostRepository repository;
+	@Autowired private BroadcastService broadcastService;
 
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -55,6 +58,13 @@ public class PostController {
 	public Post save(@RequestBody Post post) {
 		Assert.notNull(post);
 		post.setPublishedAt(new Date());
-		return repository.save(post);
+		post = repository.save(post);
+
+		try {
+			broadcastService.execute();
+		}
+		catch (IOException e) {}
+
+		return post;
 	}
 }
