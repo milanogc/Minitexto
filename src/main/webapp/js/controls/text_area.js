@@ -1,10 +1,12 @@
-'use strict';
+define(['ember'], function(Ember) {
+	'use strict';
 
-App.TextArea = Ember.TextArea.extend({
-	keyDown: function(evt) {
-		if (evt.keyCode === 13) {
-			this.get('controller').send('submit');
-			return false;
+	return Ember.TextArea.extend({
+		keyDown: function(evt) {
+			if (evt.keyCode === 13) {
+				this.get('controller').send('submit');
+				return false;
+			}
 		}
-	}
+	});
 });

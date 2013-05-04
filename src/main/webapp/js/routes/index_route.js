@@ -1,7 +1,9 @@
-'use strict';
+define(['ember'], function(Ember) {
+	'use strict';
 
-App.IndexRoute = Ember.Route.extend({
-	redirect: function() {
-		this.transitionTo('posts');
-	}
+	return Ember.Route.extend({
+		redirect: function() {
+			this.transitionTo('posts');
+		}
+	});
 });

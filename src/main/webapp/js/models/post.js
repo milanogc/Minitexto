@@ -1,8 +1,10 @@
-'use strict';
+define(['emberdata'], function(DS) {
+	'use strict';
 
-App.Post = DS.Model.extend({
-	text: DS.attr('string'),
-	publishedAt: DS.attr('date')
+	return DS.Model.extend({
+		text: DS.attr('string'),
+		publishedAt: DS.attr('date')
+	});
 });
 
 /*App.Post.FIXTURES = [{

@@ -18,7 +18,7 @@ public class AppInitializer implements WebApplicationInitializer {
 		rootCtx.register(JpaRepositoryConfig.class, ServiceConfig.class);
 		servletContext.addListener(new ContextLoaderListener(rootCtx));
 
-		ServletRegistration.Dynamic regAdvisor = servletContext.addServlet("advisor", new BroadcastServlet());
+		ServletRegistration.Dynamic regAdvisor = servletContext.addServlet("broadcast", new BroadcastServlet());
 		regAdvisor.setLoadOnStartup(1);
 		regAdvisor.addMapping("/websocket/broadcast");
 

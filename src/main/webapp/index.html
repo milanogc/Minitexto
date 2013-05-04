@@ -19,47 +19,32 @@
 				<h1>Minitexto</h1>
 			</div>
 
-			<script type="text/x-handlebars" id="posts">
-				<div class="row">
-					<div class="span4">
-						{{view App.TextArea valueBinding="newText" maxlengthBinding="maxLength" rows="4" class="span4" placeholder="Type something..." }}
-
-						<div class="pull-right">
-							<span class="label">{{remainingChars}}</span>
-							<button {{action "submit"}} type="submit" class="btn btn-primary">Submit</button>
-						</div>
-					</div>
-
-					<div class="span8">
-						<ul class="unstyled">
-							{{#each arrangedContent}}
-								<li class="well">
-									<i class="icon-user"></i>
-									{{text}}
-									<div class="pull-right"><small>({{date publishedAt}})</small></div>
-								</li>
-							{{/each}}
-						</ul>
-					</div>
-				</div>
-			</script>
+			<div class="row">
+			</div>
 		</div>
 
-		<script src="webjars/jquery/1.9.0/jquery.min.js"></script>
-		<script src="webjars/bootstrap/2.3.1/js/bootstrap.min.js"></script>
-		<script src="webjars/handlebars/1.0.0-rc.3/handlebars.min.js"></script>
-		<script src="webjars/momentjs/2.0.0/moment.min.js"></script>
-		<script src="webjars/emberjs/1.0.0-rc.2/ember.js"></script>
-		<script src="js/libs/ember-data-e324f0e582fe180bb577f648b1b7247958db21d9.min.js"></script>
-		<script src="js/app.js"></script>
-		<script src="js/helpers/date.js"></script>
-		<script src="js/models/store.js"></script>
-		<script src="js/models/post.js"></script>
-		<script src="js/routes/index_route.js"></script>
-		<script src="js/routes/posts_route.js"></script>
-		<script src="js/controllers/posts_controller.js"></script>
-		<script src="js/views/infinite_scrollable_view_mixin.js"></script>
-		<script src="js/views/posts_view.js"></script>
-		<script src="js/controls/text_area.js"></script>
+		<script type="text/x-handlebars" id="posts">
+			<div class="span4">
+				{{view Minitexto.TextArea valueBinding="newText" maxlengthBinding="maxLength" rows="4" class="span4" placeholder="Type something..." }}
+
+				<div class="pull-right">
+					<span class="label">{{remainingChars}}</span>
+					<button {{action "submit"}} type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
+
+			<div class="span8">
+				<ul class="unstyled">
+					{{#each arrangedContent}}
+						<li class="well">
+							<i class="icon-user"></i>
+							{{text}}
+							<div class="pull-right"><small>({{date publishedAt}})</small></div>
+						</li>
+					{{/each}}
+				</ul>
+			</div>
+		</script>
+		<script data-main="js/main" src="webjars/requirejs/2.1.5/require.js"></script>
 	</body>
 </html>

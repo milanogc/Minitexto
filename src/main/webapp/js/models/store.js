@@ -1,6 +1,8 @@
-'use strict';
+define(['emberdata'], function(DS) {
+	'use strict';
 
-App.Store = DS.Store.extend({
-	revision: 12,
-	adapter: DS.RESTAdapter /*DS.FixtureAdapter*/
+	return DS.Store.extend({
+		revision: 12,
+		adapter: DS.RESTAdapter /*DS.FixtureAdapter*/
+	});
 });

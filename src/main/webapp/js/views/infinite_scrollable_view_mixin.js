@@ -1,7 +1,7 @@
-'use strict';
+define(['jquery', 'ember'], function($, Ember) {
+	'use strict';
 
-/* original idea from http://nerdyworm.com/blog/2013/04/09/infinite-scroll-view-with-ember-dot-js/ */
-(function() {
+	/* original idea from http://nerdyworm.com/blog/2013/04/09/infinite-scroll-view-with-ember-dot-js/ */
 	var $document = $(document);
 	var $window = $(window);
 
@@ -17,7 +17,7 @@
 		}
 	};
 
-	App.InfineScrollableViewMixin = Ember.Mixin.create({
+	return Ember.Mixin.create({
 		didInsertElement: function() {
 			$window.on('scroll', this, scrollHandler);
 		},
@@ -26,4 +26,4 @@
 			$window.off('scroll', scrollHandler);
 		}
 	});
-})();
+});
